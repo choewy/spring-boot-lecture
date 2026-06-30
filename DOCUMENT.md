@@ -29,3 +29,9 @@
 - 즉, 추상화에 의존하는게 아니라, 추상화와 구현체 모두에 의존하고 있다.
   (추상: DiscountPolicy / 구현: FixDiscountPolicy, RateDiscountPolicy)
   (할인 정책 변경 시 DiscountPolicy의 클라이언트인 OrderService의 코드 수정 필요)
+
+## chapter-2-app-config
+
+- 앞선 챕터에서는 OCP, DIP가 위배되는 문제가 있었다.
+- 이를 해결하기 위해서 OrderService에는 추상 객체로만 선언하고, 누군가가 구현체를 넣어주는 역할(DI, 의존성 주입)을 해야한다.
+- 즉, 관심사의 분리가 필요하다.
