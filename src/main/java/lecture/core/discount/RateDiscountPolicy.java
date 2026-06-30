@@ -3,8 +3,8 @@ package lecture.core.discount;
 import lecture.core.member.Grade;
 import lecture.core.member.Member;
 
-public class FixDiscountPolicy implements DiscountPolicy {
-    private final int discountFixedAmount = 1000;
+public class RateDiscountPolicy implements DiscountPolicy {
+    private int discountPercent = 10;
 
     @Override
     public int discount(Member member, int price) {
@@ -12,6 +12,7 @@ public class FixDiscountPolicy implements DiscountPolicy {
             return 0;
         }
 
-        return discountFixedAmount;
+        return price * discountPercent / 100;
     }
+
 }
