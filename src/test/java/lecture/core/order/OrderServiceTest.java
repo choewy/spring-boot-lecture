@@ -1,8 +1,10 @@
 package lecture.core.order;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import lecture.core.AppConfig;
 import lecture.core.member.Grade;
@@ -10,14 +12,20 @@ import lecture.core.member.Member;
 import lecture.core.member.MemberService;
 
 public class OrderServiceTest {
+    AnnotationConfigApplicationContext applicationContext;
     private MemberService memberService;
     private OrderService orderService;
 
     @BeforeEach
     public void beforeEach() {
-        AppConfig appConfig = new AppConfig();
-        this.memberService = appConfig.memberService();
-        this.orderService = appConfig.orderService();
+        applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        this.memberService = applicationContext.getBean(MemberService.class);
+        this.orderService = applicationContext.getBean(OrderService.class);
+    }
+
+    @AfterEach
+    public void afterEach() {
+        applicationContext.close();
     }
 
     @Test

@@ -1,5 +1,8 @@
 package lecture.core;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
 import lecture.core.discount.DiscountPolicy;
 import lecture.core.discount.RateDiscountPolicy;
 import lecture.core.member.MemberRepository;
@@ -9,20 +12,25 @@ import lecture.core.member.MemoryMemberRepository;
 import lecture.core.order.OrderService;
 import lecture.core.order.OrderServiceImpl;
 
+@Configuration
 public class AppConfig {
-    public MemberRepository memberRepository() {
+    @Bean
+    MemberRepository memberRepository() {
         return new MemoryMemberRepository();
     }
 
-    public DiscountPolicy discountPolicy() {
+    @Bean
+    DiscountPolicy discountPolicy() {
         return new RateDiscountPolicy();
     }
 
-    public MemberService memberService() {
+    @Bean
+    MemberService memberService() {
         return new MemberServiceImpl(memberRepository());
     }
 
-    public OrderService orderService() {
+    @Bean
+    OrderService orderService() {
         return new OrderServiceImpl(memberRepository(), discountPolicy());
     }
 }
